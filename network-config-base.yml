@@ -1,0 +1,9 @@
+version: 2
+ethernets:
+  ens3:
+    addresses:
+      - ipv4_address/ipv4_mask
+    gateway4: ipv4_gw
+    nameservers:
+        search: [domain_suffix]
+        addresses: [dns_1, dns_2]
