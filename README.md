@@ -29,15 +29,13 @@ Command Syntax:
 - d DNS server 2 (mandatory)
 
 Example Run:
-xxxx@xxxx:~$./create-static-ip-cloud-init.sh -h ubuntu-test -i 192.168.0.103 -m 24 -g 192.168.0.1 -d 8.8.8.8 -e 8.8.4.4 -s mydomain.com
-
+./create-static-ip-cloud-init.sh -h ubuntu-test -i 192.168.0.103 -m 24 -g 192.168.0.1 -d 8.8.8.8 -e 8.8.4.4 -s planetexpress.com.au
 Hostname= ubuntu-test
 IP Address= 192.168.0.103
 Mask (bits)= 24
 Default GW= 192.168.0.1
 DNS_1= 8.8.8.8
 DNS_2= 8.8.4.4
-Domain search suffix= mydomain.com
 Copying network-config.yml
 'network-config-base.yml' -> 'network-config.yml'
 Substituting variables
@@ -83,8 +81,4 @@ Clone 'ubuntu-test' created successfully.
 [   7.9] Setting a random seed
 [   7.9] Setting the machine ID in /etc/machine-id
 [   7.9] Performing "lvm-uuids" ...
-Created KVM machine ubuntu-test with IPv4 address 192.168.0.103/24, gateway 192.168.0.1, DNS servers 8.8.8.8, 8.8.4.4 and domain search suffix mydomain.com
-Machine is sysprepped and will rely entirely on cloud-init for provisioning including users
-
-
-
+Created KVM machine ubuntu-test with IPv4 address 192.168.0.103/24, gateway 192.168.0.1, DNS servers 8.8.8.8, 8.8.4.4 and domain search suffix planetexpress.com.au
