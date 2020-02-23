@@ -26,4 +26,5 @@ Command Syntax:
 - m MASK (number of bits e.g. 24 for 255.255.255.0 - do not include the slash as it breaks sed syntax)
 - g DEFAULT_GW
 - d DNS server 1
-- d DNS server 2 (mandatory)
+- e DNS server 2 (mandatory)
+- s DNS suffix
