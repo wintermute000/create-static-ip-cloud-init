@@ -44,6 +44,8 @@ sudo chgrp kvm /var/lib/libvirt/images/seed.img
 
 sudo virt-clone --original ubuntu18.04 --name $HOSTNAME --file /var/lib/libvirt/images/$HOSTNAME.qcow2
 sudo virt-sysprep -d $HOSTNAME
+sudo chown libvirt-qemu /var/lib/libvirt/images/$HOSTNAME.qcow2
+sudo chgrp kvm /var/lib/libvirt/images/$HOSTNAME.qcow2
 
 echo "Created KVM machine "${HOSTNAME}" with IPv4 address "${IPV4_ADDRESS}"/"${IPV4_MASK}", gateway "${IPV4_GW}", DNS servers "${DNS_1}", "${DNS_2}" and domain search suffix "${DOMAIN_SUFFIX}"
 echo "Machine is sysprepped and will rely entirely on cloud-init for provisioning including users"
