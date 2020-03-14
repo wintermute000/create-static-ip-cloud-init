@@ -23,8 +23,9 @@ echo "DNS_2= "${DNS_2}
 echo "Domain search suffix= :${DOMAIN_SUFFIX}"
 #echo "Bridge= "${BRIDGE}
 
-echo "Copying network-config.yml"
+echo "Making customised copies of network-config.yml and user-data.yml from base files"
 cp -v network-config-base.yml network-config.yml
+cp -v user-data-base.yml user-data.yml
 
 echo "Substituting variables"
 sed -i 's/ipv4_address/'$IPV4_ADDRESS'/g' network-config.yml
@@ -33,6 +34,8 @@ sed -i 's/ipv4_gw/'$IPV4_GW'/g' network-config.yml
 sed -i 's/domain_suffix/'$DOMAIN_SUFFIX'/g' network-config.yml
 sed -i 's/dns_1/'$DNS_1'/g' network-config.yml
 sed -i 's/dns_2/'$DNS_2'/g' network-config.yml
+
+sed -i 's/ubuntu-test/'$HOSTNAME'/g' user-data.yml
 
 echo "Building cloud-init ISO"
 cloud-localds --network-config=network-config.yml seed.img user-data.yml meta-data.yml
@@ -46,6 +49,10 @@ sudo virt-clone --original ubuntu18.04 --name $HOSTNAME --file /var/lib/libvirt/
 sudo virt-sysprep -d $HOSTNAME
 sudo chown libvirt-qemu /var/lib/libvirt/images/$HOSTNAME.qcow2
 sudo chgrp kvm /var/lib/libvirt/images/$HOSTNAME.qcow2
+
+echo "Booting KVM domain"
+
+sudo virsh start $HOSTNAME
 
 echo "Created KVM machine "${HOSTNAME}" with IPv4 address "${IPV4_ADDRESS}"/"${IPV4_MASK}", gateway "${IPV4_GW}", DNS servers "${DNS_1}", "${DNS_2}" and domain search suffix "${DOMAIN_SUFFIX}
 echo "Machine is sysprepped and will rely entirely on cloud-init for provisioning including users"
